@@ -1,15 +1,16 @@
 class Book:
-    def init(self, title, price):
+    def __init__(self, title, price):
         self.title = title
         self.price = price
 
+
 class ShoppingCart:
-    def init(self):
+    def __init__(self):
         self.items = []
 
     def add_item(self, book):
         self.items.append(book)
-        print(f'Added {book.title} to your cart.')
+        print(f"Added {book.title} to your cart.")
 
     def view_cart(self):
         total = 0
@@ -20,37 +21,43 @@ class ShoppingCart:
         print(f"Total: ${total:.2f}")
         return total
 
+
 class PaymentProcessor:
-    def process_payment(self, total_amount):
-        # This is a mock payment process method
+    def process_payment(self, total_amount, card_number):
+        if total_amount <= 0:
+            print("Payment failed: total must be greater than zero.")
+            return False
+
+        if len(card_number) != 16 or not card_number.isdigit():
+            print("Payment failed: invalid card number.")
+            return False
+
         print(f"\nProcessing payment of ${total_amount:.2f}...")
-        # Simulate success
+        print("Payment successful!")
         return True
 
+
 def main():
-    # Create some sample books
     book1 = Book("The Great Gatsby", 10.99)
     book2 = Book("1984", 8.99)
     book3 = Book("To Kill a Mockingbird", 12.99)
 
-    # Initialize the shopping cart
     cart = ShoppingCart()
-
-    # Add books to the cart
     cart.add_item(book1)
     cart.add_item(book2)
     cart.add_item(book3)
 
-    # View the items in the cart
     total_amount = cart.view_cart()
 
-    # Process the payment
     payment_processor = PaymentProcessor()
-    if payment_processor.process_payment(total_amount):
-        print("Payment processed successfully!")
+    card_number = "4242424242424242"
+
+    if payment_processor.process_payment(total_amount, card_number):
+        print("Order placed successfully!")
     else:
         print("Payment failed. Please try again.")
 
-if name == "main":
+
+if __name__ == "__main__":
     main()
 
