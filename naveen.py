@@ -61,4 +61,4 @@ def main():
 if __name__ == "__main__":
     main()
 
-# payment is added
+# payment is added to the code. It checks for valid card number and total amount before processing the payment.
