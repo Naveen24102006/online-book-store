@@ -1,0 +1,251 @@
+/* ===== style.css — shared across all pages ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background: #f4f7fc;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 1.5rem 2rem;
+  width: 100%;
+  flex: 1;
+}
+
+/* cards */
+.card {
+  background: #ffffff;
+  border-radius: 32px;
+  box-shadow: 0 20px 40px -12px rgba(0, 20, 30, 0.12);
+  padding: 2rem 2.2rem;
+  transition: 0.15s ease;
+}
+
+.auth-card {
+  max-width: 480px;
+  margin: 0.5rem auto;
+}
+
+/* navbar */
+.navbar {
+  background: #0b2a3b;
+  color: white;
+  padding: 0.9rem 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 3px solid #f8b84a;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo i {
+  color: #f8b84a;
+  font-size: 2rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.6rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.nav-links a {
+  color: #eef6ff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.05rem;
+  padding: 0.3rem 0.1rem;
+  border-bottom: 2px solid transparent;
+  transition: 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-links a i {
+  font-size: 1rem;
+  color: #f8b84a;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  border-bottom-color: #f8b84a;
+  color: #ffffff;
+}
+
+.nav-links .premium-badge {
+  background: #f8b84a;
+  color: #0b2a3b;
+  padding: 0.25rem 1.2rem;
+  border-radius: 40px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.2px;
+  border-bottom: none !important;
+}
+
+.nav-links .premium-badge i {
+  color: #0b2a3b;
+}
+
+/* dashboard stats */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.5rem;
+  margin: 1.8rem 0;
+}
+
+.stat-item {
+  background: #f0f6fe;
+  border-radius: 24px;
+  padding: 1.5rem 0.8rem;
+  text-align: center;
+  border: 1px solid #dde9f5;
+}
+
+.stat-item i {
+  font-size: 2rem;
+  color: #0b2a3b;
+  background: white;
+  padding: 0.5rem;
+  border-radius: 60px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.02);
+}
+
+.stat-item h3 {
+  margin-top: 0.6rem;
+  font-weight: 600;
+  color: #0b2a3b;
+}
+
+.stat-item p {
+  color: #1f3e4f;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.book-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.book-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.6rem 0.2rem;
+  border-bottom: 1px solid #e6edf5;
+}
+
+.book-row span:first-child {
+  font-weight: 500;
+}
+
+.book-row .tag {
+  background: #e3edf7;
+  padding: 0.15rem 0.9rem;
+  border-radius: 40px;
+  font-size: 0.75rem;
+  text-transform: capitalize;
+}
+
+/* forms */
+.form-group {
+  margin-bottom: 1.4rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+  color: #1f3e4f;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1.5px solid #d4e0ec;
+  border-radius: 60px;
+  font-size: 1rem;
+  background: white;
+  transition: 0.15s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #0b2a3b;
+  box-shadow: 0 0 0 3px rgba(11, 42, 59, 0.08);
+}
+
+.btn-primary {
+  background: #0b2a3b;
+  color: white;
+  border: none;
+  padding: 0.9rem 2rem;
+  border-radius: 60px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid transparent;
+}
+
+.btn-primary:hover {
+  background: #1a3f54;
+  transform: scale(1.01);
+  box-shadow: 0 8px 18px rgba(11, 42, 59, 0.15);
+}
+
+.btn-primary i {
+  color: #f8b84a;
+}
+
+/* messages */
+#loginMessage, #registerMessage {
+  min-height: 1.8rem;
+  color: #0b2a3b;
+}
+
+/* responsive */
+@media (max-width: 680px) {
+  .navbar {
+    flex-direction: column;
+    gap: 0.6rem;
+    align-items: stretch;
+    text-align: center;
+  }
+  .nav-links {
+    justify-content: center;
+    gap: 0.8rem;
+  }
+  .container {
+    padding: 1rem;
+  }
+  .card {
+    padding: 1.5rem;
+  }
+}
