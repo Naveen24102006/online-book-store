@@ -1,208 +1,70 @@
-<!-- search.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Search Books</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f5efe9;
-      padding: 20px;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .search-container {
-      background: #fffcf8;
-      border-radius: 40px;
-      box-shadow: 0 30px 60px rgba(0,0,0,0.15);
-      width: 100%;
-      max-width: 1200px;
-      padding: 30px 40px 40px;
-    }
-    .page-title {
-      font-size: 28px;
-      font-weight: 600;
-      color: #2d1b0e;
-      margin-bottom: 6px;
-    }
-    .page-desc {
-      color: #7a5f4a;
-      margin-bottom: 24px;
-    }
-    .search-bar {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 28px;
-      flex-wrap: wrap;
-    }
-    .search-bar input {
-      flex: 1;
-      padding: 14px 20px;
-      border: 2px solid #e8ddd4;
-      border-radius: 40px;
-      font-size: 15px;
-      background: #faf5f0;
-      outline: none;
-      transition: border 0.2s;
-      min-width: 200px;
-    }
-    .search-bar input:focus {
-      border-color: #b68b6e;
-      background: white;
-    }
-    .search-bar button {
-      padding: 14px 28px;
-      background: #4a2c1a;
-      color: #f5e6d3;
-      border: none;
-      border-radius: 40px;
-      font-weight: 600;
-      font-size: 15px;
-      cursor: pointer;
-      transition: background 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .search-bar button:hover {
-      background: #5f3a26;
-    }
-    .items-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 24px;
-    }
-    .item-card {
-      background: #faf5f0;
-      border-radius: 20px;
-      padding: 18px 16px 20px;
-      border: 1px solid #e8ddd4;
-      transition: transform 0.2s;
-    }
-    .item-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-    }
-    .item-card .title {
-      font-weight: 600;
-      font-size: 17px;
-      color: #2d1b0e;
-    }
-    .item-card .author {
-      font-size: 14px;
-      color: #7a5f4a;
-      margin: 4px 0 8px;
-    }
-    .item-card .price {
-      font-weight: 700;
-      color: #4a2c1a;
-      font-size: 18px;
-    }
-    .item-card .actions {
-      margin-top: 14px;
-      display: flex;
-      gap: 8px;
-    }
-    .item-card .actions button {
-      flex: 1;
-      padding: 8px 0;
-      border: none;
-      border-radius: 30px;
-      font-weight: 500;
-      cursor: pointer;
-      font-size: 13px;
-      background: #e8ddd4;
-      color: #2d1b0e;
-      transition: background 0.2s;
-    }
-    .item-card .actions button:hover {
-      background: #d4c2b6;
-    }
-    .empty-message {
-      color: #a98d78;
-      font-size: 16px;
-      padding: 30px 0;
-      text-align: center;
-      grid-column: 1 / -1;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium · Bookstore</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="search-container">
-  <h2 class="page-title">Search Books</h2>
-  <p class="page-desc">Find your next read by title or author.</p>
-  <div class="search-bar">
-    <input type="text" id="searchInput" placeholder="Search by title or author..." />
-    <button id="searchBtn"><i class="fas fa-search"></i> Search</button>
-    <button id="clearBtn" style="background:#e8ddd4; color:#2d1b0e;">Clear</button>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <div class="logo">
+      <i class="fas fa-book-open"></i> 
+      <span>PageHaven</span>
+    </div>
+    <div class="nav-links">
+      <a href="dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
+      <a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+      <a href="register.html"><i class="fas fa-user-plus"></i> Register</a>
+      <a href="premium.html" class="premium-badge active"><i class="fas fa-crown"></i> Premium</a>
+    </div>
+  </nav>
+
+  <!-- ===== PREMIUM PAGE ===== -->
+  <div class="container page-section" id="premiumPage">
+    <div class="card" style="background: linear-gradient(145deg, #fcf9f0, #f5efe4); border-left: 8px solid #f8b84a;">
+      <h1 style="display: flex; align-items: center; gap: 12px;">
+        <i class="fas fa-crown" style="color: #f8b84a; font-size: 2.2rem;"></i> 
+        Premium Membership
+      </h1>
+      <p style="color: #2c4a5a; font-size: 1.2rem; max-width: 600px;">
+        Unlock exclusive books, early access, and ad‑free reading.
+      </p>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 2rem; margin: 2rem 0;">
+        <div style="flex: 1; min-width: 200px;">
+          <i class="fas fa-check-circle" style="color: #0b2a3b;"></i> Unlimited audiobooks<br>
+          <i class="fas fa-check-circle" style="color: #0b2a3b;"></i> Author Q&A sessions<br>
+          <i class="fas fa-check-circle" style="color: #0b2a3b;"></i> 30% off all titles<br>
+          <i class="fas fa-check-circle" style="color: #0b2a3b;"></i> Exclusive covers
+        </div>
+        <div style="flex: 1; min-width: 200px; background: white; padding: 1.5rem; border-radius: 30px; box-shadow: 0 8px 20px rgba(0,0,0,0.03);">
+          <span style="font-size: 2.2rem; font-weight: 700;">$9.99</span>
+          <span style="color: #4b677a;">/ month</span>
+          <br>
+          <button class="btn-primary" style="margin-top: 1rem; width: 100%;"><i class="fas fa-gem"></i> Upgrade now</button>
+          <p style="font-size: 0.8rem; margin-top: 0.6rem; color: #4b677a;">cancel anytime</p>
+        </div>
+      </div>
+
+      <!-- extra premium content -->
+      <div style="background: #e5eef9; border-radius: 40px; padding: 1rem 1.8rem; display: inline-block;">
+        <i class="fas fa-star" style="color: #f8b84a;"></i> 
+        <span style="font-weight: 500;">Premium members get first dibs on new releases.</span>
+      </div>
+      <div style="margin-top: 1.5rem;">
+        <a href="dashboard.html" style="color: #0b2a3b; font-weight: 500;"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+      </div>
+    </div>
   </div>
-  <div id="results" class="items-grid"></div>
-</div>
-<script>
-  const books = [
-    { id: 1, title: "The Silent Patient", author: "Alex Michaelides", price: 14.99 },
-    { id: 2, title: "Where the Crawdads Sing", author: "Delia Owens", price: 16.99 },
-    { id: 3, title: "Atomic Habits", author: "James Clear", price: 19.99 },
-    { id: 4, title: "The Alchemist", author: "Paulo Coelho", price: 12.99 },
-    { id: 5, title: "Dune", author: "Frank Herbert", price: 18.99 },
-    { id: 6, title: "The Hobbit", author: "J.R.R. Tolkien", price: 13.99 },
-    { id: 7, title: "Sapiens", author: "Yuval Noah Harari", price: 15.99 },
-    { id: 8, title: "Becoming", author: "Michelle Obama", price: 17.99 },
-  ];
 
-  const resultsDiv = document.getElementById('results');
-  const searchInput = document.getElementById('searchInput');
-  const searchBtn = document.getElementById('searchBtn');
-  const clearBtn = document.getElementById('clearBtn');
+  <footer style="text-align: center; padding: 1.5rem; color: #4b677a; font-size: 0.9rem; border-top: 1px solid #dde9f5; margin-top: 2rem;">
+    <i class="fas fa-book"></i> PageHaven · all files connected
+  </footer>
 
-  function renderBooks(list) {
-    resultsDiv.innerHTML = '';
-    if (list.length === 0) {
-      resultsDiv.innerHTML = '<div class="empty-message">No books found.</div>';
-      return;
-    }
-    list.forEach(book => {
-      const card = document.createElement('div');
-      card.className = 'item-card';
-      card.innerHTML = `
-        <div class="title">${book.title}</div>
-        <div class="author">${book.author}</div>
-        <div class="price">$${book.price.toFixed(2)}</div>
-        <div class="actions"><button>Add to Cart</button></div>
-      `;
-      resultsDiv.appendChild(card);
-    });
-  }
-
-  function performSearch() {
-    const query = searchInput.value.trim().toLowerCase();
-    if (query === '') {
-      renderBooks(books);
-      return;
-    }
-    const filtered = books.filter(b =>
-      b.title.toLowerCase().includes(query) ||
-      b.author.toLowerCase().includes(query)
-    );
-    renderBooks(filtered);
-  }
-
-  searchBtn.addEventListener('click', performSearch);
-  searchInput.addEventListener('keyup', (e) => { if (e.key === 'Enter') performSearch(); });
-  clearBtn.addEventListener('click', () => {
-    searchInput.value = '';
-    renderBooks(books);
-  });
-
-  // initial render
-  renderBooks(books);
-</script>
+  <script src="script.js"></script>
 </body>
 </html>
- //search option 
