@@ -72,4 +72,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // --- 5. (optional) any other cross-page interactions ---
   console.log('📚 PageHaven · all files connected (dashboard, login, register, premium)');
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 0be6b6aaaba3fb3c32c6725437115a2494960b8e
