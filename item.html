@@ -1,0 +1,137 @@
+<!-- items.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Books</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    /* Same styles as Search – just reuse */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5efe9;
+      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .items-container {
+      background: #fffcf8;
+      border-radius: 40px;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+      width: 100%;
+      max-width: 1200px;
+      padding: 30px 40px 40px;
+    }
+    .page-title {
+      font-size: 28px;
+      font-weight: 600;
+      color: #2d1b0e;
+      margin-bottom: 6px;
+    }
+    .page-desc {
+      color: #7a5f4a;
+      margin-bottom: 24px;
+    }
+    .items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 24px;
+    }
+    .item-card {
+      background: #faf5f0;
+      border-radius: 20px;
+      padding: 18px 16px 20px;
+      border: 1px solid #e8ddd4;
+      transition: transform 0.2s;
+    }
+    .item-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    }
+    .item-card .title {
+      font-weight: 600;
+      font-size: 17px;
+      color: #2d1b0e;
+    }
+    .item-card .author {
+      font-size: 14px;
+      color: #7a5f4a;
+      margin: 4px 0 8px;
+    }
+    .item-card .price {
+      font-weight: 700;
+      color: #4a2c1a;
+      font-size: 18px;
+    }
+    .item-card .actions {
+      margin-top: 14px;
+      display: flex;
+      gap: 8px;
+    }
+    .item-card .actions button {
+      flex: 1;
+      padding: 8px 0;
+      border: none;
+      border-radius: 30px;
+      font-weight: 500;
+      cursor: pointer;
+      font-size: 13px;
+      background: #4a2c1a;
+      color: #f5e6d3;
+      transition: background 0.2s;
+    }
+    .item-card .actions button:hover {
+      background: #5f3a26;
+    }
+  </style>
+</head>
+<body>
+<div class="items-container">
+  <h2 class="page-title">All Books</h2>
+  <p class="page-desc">Browse our full collection.</p>
+  <div id="allItems" class="items-grid"></div>
+</div>
+<script>
+  const books = [
+    { id: 1, title: "The Silent Patient", author: "Alex Michaelides", price: 14.99 },
+    { id: 2, title: "Where the Crawdads Sing", author: "Delia Owens", price: 16.99 },
+    { id: 3, title: "Atomic Habits", author: "James Clear", price: 19.99 },
+    { id: 4, title: "The Alchemist", author: "Paulo Coelho", price: 12.99 },
+    { id: 5, title: "Dune", author: "Frank Herbert", price: 18.99 },
+    { id: 6, title: "The Hobbit", author: "J.R.R. Tolkien", price: 13.99 },
+    { id: 7, title: "Sapiens", author: "Yuval Noah Harari", price: 15.99 },
+    { id: 8, title: "Becoming", author: "Michelle Obama", price: 17.99 },
+  ];
+
+  const container = document.getElementById('allItems');
+
+  books.forEach(book => {
+    const card = document.createElement('div');
+    card.className = 'item-card';
+    card.innerHTML = `
+      <div class="title">${book.title}</div>
+      <div class="author">${book.author}</div>
+      <div class="price">$${book.price.toFixed(2)}</div>
+      <div class="actions">
+        <button data-id="${book.id}"><i class="fas fa-cart-plus"></i> Cart</button>
+        <button style="background:#e8ddd4; color:#2d1b0e;" data-id="${book.id}">Select</button>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+
+  // Add event listeners (demo)
+  container.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const id = this.dataset.id;
+      const book = books.find(b => b.id == id);
+      alert(`Action on "${book.title}"`);
+    });
+  });
+</script>
+</body>
+</html>
