@@ -1,70 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Premium · Bookstore</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+// ===== script.js — shared functionality, all pages connected =====
 
-  <!-- ===== NAVBAR ===== -->
-  <nav class="navbar">
-    <div class="logo">
-      <i class="fas fa-book-open"></i> 
-      <span>PageHaven</span>
-    </div>
-    <div class="nav-links">
-      <a href="dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
-      <a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
-      <a href="register.html"><i class="fas fa-user-plus"></i> Register</a>
-      <a href="premium.html" class="premium-badge active"><i class="fas fa-crown"></i> Premium</a>
-    </div>
-  </nav>
+document.addEventListener('DOMContentLoaded', function () {
+  // --- 1. highlight active nav link (already handled by 'active' class in HTML) 
+  //    but we keep it dynamic if needed.
+  const currentPage = window.location.pathname.split('/').pop() || 'dashboard.html';
+  const navLinks = document.querySelectorAll('.nav-links a');
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href === currentPage) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
 
-  <!-- ===== PREMIUM PAGE ===== -->
-  <div class="container page-section" id="premiumPage">
-    <div class="card" style="background: linear-gradient(145deg, #fcf9f0, #f5efe4); border-left: 8px solid #f8b84a;">
-      <h1 style="display: flex; align-items: center; gap: 12px;">
-        <i class="fas fa-crown" style="color: #f8b84a; font-size: 2.2rem;"></i> 
-        Premium Membership
-      </h1>
-      <p style="color: #2c4a5a; font-size: 1.2rem; max-width: 600px;">
-        Unlock exclusive books, early access, and ad‑free reading.
-      </p>
+  // --- 2. Login form handler (connected to dashboard) ---
+  const loginForm = document.getElementById('loginForm');
+  const loginMsg = document.getElementById('loginMessage');
+  if (loginForm) {
+    loginForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value.trim();
 
-      <div style="display: flex; flex-wrap: wrap; gap: 2rem; margin: 2rem 0;">
-        <div style="flex: 1; min-width: 200px;">
-          <i class="fas fa-check-circle" style="color: #0b2a3b;"></i> Unlimited audiobooks<br>
-          <i class="fas fa-check-circle" style="color: #0b2a3b;"></i> Author Q&A sessions<br>
-          <i class="fas fa-check-circle" style="color: #0b2a3b;"></i> 30% off all titles<br>
-          <i class="fas fa-check-circle" style="color: #0b2a3b;"></i> Exclusive covers
-        </div>
-        <div style="flex: 1; min-width: 200px; background: white; padding: 1.5rem; border-radius: 30px; box-shadow: 0 8px 20px rgba(0,0,0,0.03);">
-          <span style="font-size: 2.2rem; font-weight: 700;">$9.99</span>
-          <span style="color: #4b677a;">/ month</span>
-          <br>
-          <button class="btn-primary" style="margin-top: 1rem; width: 100%;"><i class="fas fa-gem"></i> Upgrade now</button>
-          <p style="font-size: 0.8rem; margin-top: 0.6rem; color: #4b677a;">cancel anytime</p>
-        </div>
-      </div>
+      if (!email || !password) {
+        loginMsg.innerHTML = '<span style="color:#b13e3e;"><i class="fas fa-exclamation-circle"></i> Please fill in all fields.</span>';
+        return;
+      }
+      // simple mock login — redirect to dashboard
+      loginMsg.innerHTML = '<span style="color:#1f7b4d;"><i class="fas fa-check-circle"></i> Login successful! Redirecting...</span>';
+      setTimeout(() => {
+        window.location.href = 'dashboard.html';
+      }, 800);
+    });
+  }
 
-      <!-- extra premium content -->
-      <div style="background: #e5eef9; border-radius: 40px; padding: 1rem 1.8rem; display: inline-block;">
-        <i class="fas fa-star" style="color: #f8b84a;"></i> 
-        <span style="font-weight: 500;">Premium members get first dibs on new releases.</span>
-      </div>
-      <div style="margin-top: 1.5rem;">
-        <a href="dashboard.html" style="color: #0b2a3b; font-weight: 500;"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
-      </div>
-    </div>
-  </div>
+  // --- 3. Register form handler (connected to login) ---
+  const registerForm = document.getElementById('registerForm');
+  const regMsg = document.getElementById('registerMessage');
+  if (registerForm) {
+    registerForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const name = document.getElementById('regName').value.trim();
+      const email = document.getElementById('regEmail').value.trim();
+      const password = document.getElementById('regPassword').value.trim();
 
-  <footer style="text-align: center; padding: 1.5rem; color: #4b677a; font-size: 0.9rem; border-top: 1px solid #dde9f5; margin-top: 2rem;">
-    <i class="fas fa-book"></i> PageHaven · all files connected
-  </footer>
+      if (!name || !email || !password) {
+        regMsg.innerHTML = '<span style="color:#b13e3e;"><i class="fas fa-exclamation-circle"></i> All fields are required.</span>';
+        return;
+      }
+      if (password.length < 6) {
+        regMsg.innerHTML = '<span style="color:#b13e3e;"><i class="fas fa-exclamation-circle"></i> Password must be at least 6 characters.</span>';
+        return;
+      }
+      // mock registration — redirect to login
+      regMsg.innerHTML = '<span style="color:#1f7b4d;"><i class="fas fa-check-circle"></i> Account created! Redirecting to login...</span>';
+      setTimeout(() => {
+        window.location.href = 'login.html';
+      }, 800);
+    });
+  }
 
-  <script src="script.js"></script>
-</body>
-</html>
+  // --- 4. premium upgrade button (simple feedback) ---
+  const upgradeBtn = document.querySelector('.btn-primary .fa-gem')?.closest('.btn-primary');
+  if (upgradeBtn) {
+    upgradeBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      alert('✨ Premium upgrade flow (demo). All files connected.');
+    });
+  }
+
+  // --- 5. (optional) any other cross-page interactions ---
+  console.log('📚 PageHaven · all files connected (dashboard, login, register, premium)');
+});
