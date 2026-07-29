@@ -1,0 +1,81 @@
+<!-- dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5efe9;
+      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .dashboard {
+      background: #fffcf8;
+      border-radius: 40px;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+      width: 100%;
+      max-width: 1200px;
+      padding: 30px 40px 40px;
+    }
+    .page-title {
+      font-size: 28px;
+      font-weight: 600;
+      color: #2d1b0e;
+      margin-bottom: 6px;
+    }
+    .page-desc {
+      color: #7a5f4a;
+      margin-bottom: 24px;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+    .stat-card {
+      background: #f8f2ec;
+      border-radius: 20px;
+      padding: 20px 18px;
+      border: 1px solid #e8ddd4;
+    }
+    .stat-card .num {
+      font-size: 32px;
+      font-weight: 700;
+      color: #2d1b0e;
+    }
+    .stat-card .label {
+      font-size: 14px;
+      color: #7a5f4a;
+      margin-top: 4px;
+    }
+    .welcome-note {
+      color: #6a5544;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+<div class="dashboard">
+  <h2 class="page-title">Dashboard</h2>
+  <p class="page-desc">Welcome back, John! Here's your store overview.</p>
+  <div class="stats-grid">
+    <div class="stat-card"><div class="num">12</div><div class="label">Books in cart</div></div>
+    <div class="stat-card"><div class="num">3</div><div class="label">Pending orders</div></div>
+    <div class="stat-card"><div class="num">4</div><div class="label">Wishlist items</div></div>
+    <div class="stat-card"><div class="num">8</div><div class="label">Reviews written</div></div>
+  </div>
+  <div class="welcome-note">
+    💡 Use the sidebar to navigate to Search, Items, or Place Order.
+  </div>
+</div>
+</body>
+</html>
