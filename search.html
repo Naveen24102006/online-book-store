@@ -1,0 +1,208 @@
+<!-- search.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Search Books</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5efe9;
+      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .search-container {
+      background: #fffcf8;
+      border-radius: 40px;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+      width: 100%;
+      max-width: 1200px;
+      padding: 30px 40px 40px;
+    }
+    .page-title {
+      font-size: 28px;
+      font-weight: 600;
+      color: #2d1b0e;
+      margin-bottom: 6px;
+    }
+    .page-desc {
+      color: #7a5f4a;
+      margin-bottom: 24px;
+    }
+    .search-bar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+    .search-bar input {
+      flex: 1;
+      padding: 14px 20px;
+      border: 2px solid #e8ddd4;
+      border-radius: 40px;
+      font-size: 15px;
+      background: #faf5f0;
+      outline: none;
+      transition: border 0.2s;
+      min-width: 200px;
+    }
+    .search-bar input:focus {
+      border-color: #b68b6e;
+      background: white;
+    }
+    .search-bar button {
+      padding: 14px 28px;
+      background: #4a2c1a;
+      color: #f5e6d3;
+      border: none;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .search-bar button:hover {
+      background: #5f3a26;
+    }
+    .items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 24px;
+    }
+    .item-card {
+      background: #faf5f0;
+      border-radius: 20px;
+      padding: 18px 16px 20px;
+      border: 1px solid #e8ddd4;
+      transition: transform 0.2s;
+    }
+    .item-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    }
+    .item-card .title {
+      font-weight: 600;
+      font-size: 17px;
+      color: #2d1b0e;
+    }
+    .item-card .author {
+      font-size: 14px;
+      color: #7a5f4a;
+      margin: 4px 0 8px;
+    }
+    .item-card .price {
+      font-weight: 700;
+      color: #4a2c1a;
+      font-size: 18px;
+    }
+    .item-card .actions {
+      margin-top: 14px;
+      display: flex;
+      gap: 8px;
+    }
+    .item-card .actions button {
+      flex: 1;
+      padding: 8px 0;
+      border: none;
+      border-radius: 30px;
+      font-weight: 500;
+      cursor: pointer;
+      font-size: 13px;
+      background: #e8ddd4;
+      color: #2d1b0e;
+      transition: background 0.2s;
+    }
+    .item-card .actions button:hover {
+      background: #d4c2b6;
+    }
+    .empty-message {
+      color: #a98d78;
+      font-size: 16px;
+      padding: 30px 0;
+      text-align: center;
+      grid-column: 1 / -1;
+    }
+  </style>
+</head>
+<body>
+<div class="search-container">
+  <h2 class="page-title">Search Books</h2>
+  <p class="page-desc">Find your next read by title or author.</p>
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search by title or author..." />
+    <button id="searchBtn"><i class="fas fa-search"></i> Search</button>
+    <button id="clearBtn" style="background:#e8ddd4; color:#2d1b0e;">Clear</button>
+  </div>
+  <div id="results" class="items-grid"></div>
+</div>
+<script>
+  const books = [
+    { id: 1, title: "The Silent Patient", author: "Alex Michaelides", price: 14.99 },
+    { id: 2, title: "Where the Crawdads Sing", author: "Delia Owens", price: 16.99 },
+    { id: 3, title: "Atomic Habits", author: "James Clear", price: 19.99 },
+    { id: 4, title: "The Alchemist", author: "Paulo Coelho", price: 12.99 },
+    { id: 5, title: "Dune", author: "Frank Herbert", price: 18.99 },
+    { id: 6, title: "The Hobbit", author: "J.R.R. Tolkien", price: 13.99 },
+    { id: 7, title: "Sapiens", author: "Yuval Noah Harari", price: 15.99 },
+    { id: 8, title: "Becoming", author: "Michelle Obama", price: 17.99 },
+  ];
+
+  const resultsDiv = document.getElementById('results');
+  const searchInput = document.getElementById('searchInput');
+  const searchBtn = document.getElementById('searchBtn');
+  const clearBtn = document.getElementById('clearBtn');
+
+  function renderBooks(list) {
+    resultsDiv.innerHTML = '';
+    if (list.length === 0) {
+      resultsDiv.innerHTML = '<div class="empty-message">No books found.</div>';
+      return;
+    }
+    list.forEach(book => {
+      const card = document.createElement('div');
+      card.className = 'item-card';
+      card.innerHTML = `
+        <div class="title">${book.title}</div>
+        <div class="author">${book.author}</div>
+        <div class="price">$${book.price.toFixed(2)}</div>
+        <div class="actions"><button>Add to Cart</button></div>
+      `;
+      resultsDiv.appendChild(card);
+    });
+  }
+
+  function performSearch() {
+    const query = searchInput.value.trim().toLowerCase();
+    if (query === '') {
+      renderBooks(books);
+      return;
+    }
+    const filtered = books.filter(b =>
+      b.title.toLowerCase().includes(query) ||
+      b.author.toLowerCase().includes(query)
+    );
+    renderBooks(filtered);
+  }
+
+  searchBtn.addEventListener('click', performSearch);
+  searchInput.addEventListener('keyup', (e) => { if (e.key === 'Enter') performSearch(); });
+  clearBtn.addEventListener('click', () => {
+    searchInput.value = '';
+    renderBooks(books);
+  });
+
+  // initial render
+  renderBooks(books);
+</script>
+</body>
+</html>
+ //search option 
